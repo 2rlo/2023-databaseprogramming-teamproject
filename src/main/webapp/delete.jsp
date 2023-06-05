@@ -77,7 +77,8 @@ try{
 				<div class="cell" align="center"><%=t_professor %></div>				
 				<div class="cell" align="center"><%=c_name %></div>
 				<div class="cell" align="center"><%=c_unit %></div>
-				<div class="cell" align="center"><a href="delete_verify.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>">취소</a></div>
+				<div class="cell" align="center">
+					<button class="delete_button rounded" href="delete_verify.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>">취소</button></div>
 			</div>
 			<%
 		}

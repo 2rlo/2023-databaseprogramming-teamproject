@@ -21,7 +21,7 @@
 	</form>
 </div>
 <%
-	String type = request.getParameter("selected_type");
+	String type = request.getParameter("option");
 
 	Connection myConn = null;
 	Statement stmt = null;

@@ -23,7 +23,9 @@
 <%
 	Connection myConn = null;
 	Statement stmt = null;
+	Statement enrollStmt = null;
 	ResultSet myResultSet = null;
+	ResultSet enrollResultSet = null;
 	String mySQL = " ";
 	
 	String dburl = System.getenv("dburl");
@@ -53,17 +55,14 @@
 		System.err.println("SQLException: "+ ex.getMessage());
 	}
 %>
-<div class="select_wrapper">
-<form method="post" action="inquiry_course.jsp">
-	<label>영역 : 	</label>
-    <select name="selected_type" required>
-    			<option value="" disabled selected>분류 선택</option>
-    			<option value="major">전공</option>
-				<option value="required">교양필수</option>
-				<option value="ge">일반교양</option> 
-    </select>
-	<input type="submit" value="조회">
-</form>
+<div class="sec-center">
+	<input class="dropdown" type="checkbox" id="dropdown" name="dropdown"/>
+	<label class="for-dropdown" for="dropdown">영역 선택</label>
+		<div class="section-dropdown">
+			<a href="inquiry_course.jsp?option=major" class="dropdown_a">전공</a>
+			<a href="inquiry_course.jsp?option=required" class="dropdown_a">교양필수</a>
+			<a href="inquiry_course.jsp?option=ge" class="dropdown_a">일반교양</a>			
+		</div>
 </div>
 <div class="insert_wrapper">
 <h3><%=nYear %>년 <%= nSemester %>학기 수강신청</h3>
@@ -92,6 +91,7 @@
 			int t_max = myResultSet.getInt("t_max");
 			int t_left = myResultSet.getInt("t_left");
 			int c_unit = myResultSet.getInt("c_unit");
+			
 			%>
 			<div class="row">
 				<div class="cell"><%=c_id %></div>
@@ -101,12 +101,11 @@
 				<div class="cell"><%=c_unit %></div>
 				<div class="cell"><%=t_max %></div>
 				<div class="cell"><%=t_left %></div>
-				<% if(t_left != 0) {%>
-				<div class="cell" style ="border-right-style: none;"><a href="insert_verify.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>" class="badge text-bg-primary">신청</a></div>
-				
-				<% }else {%>
-				<div class="cell" style ="border-right-style: none;"><a href="insert_verify.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>" class="badge text-bg-danger">신청 불가</a></div>
-				<%} %>
+				<% if(t_left == 0) {%>
+				<div class="cell" style ="border-right-style: none;"><button class="nonInsert_button rounded" onclick="location.href='insert_verify.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>'">신청 불가</button></div>
+				<% }	else if(t_left != 0) { %>
+				<div class="cell" style ="border-right-style: none;"><button class="insert_button rounded" onclick="location.href='insert_verify.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>'">신청</button></div>
+				<% } %>
 			</div>
 <% 				
 		}
