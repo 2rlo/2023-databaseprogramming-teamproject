@@ -6,16 +6,15 @@
 <head>
 <meta charset="UTF-8">
 <link href="style.css" rel="stylesheet">
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 <title>수강신청 입력</title>
 </head>
 <body>
 <%@ include file="top.jsp" %>
 <% if (session_id == null) response.sendRedirect("login.jsp"); %>
-<div class="wrapper">
+<div style="margin-bottom:15px;">
 	<form method="post" action="search.jsp" class="search_form">
 	<div class="search_container">
-	<input type="text" class="search" placeholder="검색어" name="search" />
+	<input type="text" class="search" placeholder="검색어" name="search"/>
 	<input TYPE="SUBMIT" NAME="Submit" class="search_button rounded" value="검색"/>
 	</div>
 	</form>
@@ -55,41 +54,35 @@
 		System.err.println("SQLException: "+ ex.getMessage());
 	}
 %>
-<div style="text-align: center;">
-<form method="post" align="center" action="inquiry_course.jsp">
-	<label>영역 : </label>
-    <select name="selected_type" required>
-    			<option value="" disabled selected>연도 선택</option>
-    			<option value='major'>전공</option>
-				<option value='required'>교양 필수</option>
-				<option value='ge'>일반 교양</option> 
-    </select>
-    
-	<input type="submit" value="조회">
-</form>
+<div class="sec-center">
+	<input class="dropdown" type="checkbox" id="dropdown" name="dropdown"/>
+	<label class="for-dropdown" for="dropdown">
+	<% if(type.equals("required")){ // c_id : 'R'%>
+		교양 필수 조회
+	<%} else if(type.equals("ge")){ // 'G' %>
+		일반 교양 조회
+	<%} else{ //전공과목%>
+	전공 과목 조회
+	<%}%>
+	</label>
+		<div class="section-dropdown">
+			<a href="inquiry_course.jsp?option=major" class="dropdown_a">전공</a>
+			<a href="inquiry_course.jsp?option=required" class="dropdown_a">교양필수</a>
+			<a href="inquiry_course.jsp?option=ge" class="dropdown_a">일반교양</a>			
+		</div>
 </div>
 <div class="insert_wrapper">
 <h3><%=nYear %>년 <%= nSemester %>학기 수강신청</h3>
-
-<% if(type.equals("required")){ // c_id : 'R'%>
-		<p>교양 필수 조회</p>
-	<%} else if(type.equals("ge")){ // 'G' %>
-		<p>일반 교양 조회</p>
-	<%} else{ //전공과목%>
-	<p>전공 과목 조회</p>
-	<%}%>
 <div class="table">
-<br>
 <div class="row header">
-<div class="cell" align="center"style="float: left; width: 10%;">과목번호</div>
-<div class="cell" align="center"style="float: left; width: 10%;">분반</div>
-<div class="cell" align="center"style="float: left; width: 10%;">담당교수</div>
-<div class="cell" align="center"style="float: left; width: 25%;">과목명</div>
-<div class="cell" align="center"style="float: left; width: 10%;">학점</div>
-<div class="cell" align="center"style="float: left; width: 10%;">정원</div>
-<div class="cell" align="center"style="float: left; width: 10%;">여석</div>
-<div class="cell" align="center"style="float: left; width: 15%;">수강신청</div>
-</div>
+<div class="cell">과목번호</div>
+<div class="cell">분반</div>
+<div class="cell">담당교수</div>
+<div class="cell">과목명</div>
+<div class="cell">학점</div>
+<div class="cell">정원</div>
+<div class="cell">여석</div>
+<div class="cell">수강신청</div>
 </div>
 <%
 	if(type.equals("required")){ // c_id : 'R'
@@ -120,19 +113,18 @@
 			int t_left = myResultSet.getInt("t_left");
 			%>
 			<div class="row" >
-				<div class="cell" align="center" style="float: left; width: 10%;"><%=c_id %></div>
-				<div class="cell" align="center" style="float: left; width: 10%;"><%=c_id_no%></div>
-				<div class="cell" align="center" style="float: left; width: 10%;"><%=t_professor %></div>				
-				<div class="cell" align="center" style="float: left; width: 25%;"><%=c_name %></div>
-				<div class="cell" align="center" style="float: left; width: 10%;"><%=c_unit %></div>
-				<div class="cell" align="center" style="float: left; width: 10%;"><%=t_max %></div>
-				<div class="cell" align="center" style="float: left; width: 10%;"><%=t_left %></div>
-				<% if(t_left != 0) {%>
-				<div class="cell" align="center" style="float: left; width: 15%;"><a href="insert_verify.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>" class="badge text-bg-primary">신청</a></div>
-				
-				<% }else {%>
-				<div class="cell" align="center" style="float: left; width: 15%;"><a href="insert_verify.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>" class="badge text-bg-danger">신청 불가</a></div>
-				<%} %>
+				<div class="cell"><%=c_id %></div>
+				<div class="cell"><%=c_id_no%></div>
+				<div class="cell"><%=t_professor %></div>				
+				<div class="cell"><%=c_name %></div>
+				<div class="cell"><%=c_unit %></div>
+				<div class="cell"><%=t_max %></div>
+				<div class="cell"><%=t_left %></div>
+				<% if(t_left == 0) {%>
+				<div class="cell" style ="border-right-style: none;"><button class="nonInsert_button rounded" onclick="location.href='insert_verify.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>'">신청 불가</button></div>
+				<% }	else if(t_left != 0) { %>
+				<div class="cell" style ="border-right-style: none;"><button class="insert_button rounded" onclick="location.href='insert_verify.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>'">신청</button></div>
+				<% } %>
 			</div>
 <% 				
 		}
@@ -140,7 +132,7 @@
 	stmt.close();
 	myConn.close();
 %>
-
+</div>
 </div>
 </div>
 </body>
