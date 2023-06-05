@@ -11,7 +11,7 @@
 <body>
 <%@ include file="top.jsp" %>
 <% if (session_id == null) response.sendRedirect("login.jsp"); %>
-<div class="wrapper">
+<div style="margin-bottom:15px;">
 	<form method="post" action="search.jsp" class="search_form">
 	<div class="search_container">
 	<input type="text" class="search" placeholder="검색어" name="search"/>
@@ -53,19 +53,30 @@
 		System.err.println("SQLException: "+ ex.getMessage());
 	}
 %>
-
+<div class="select_wrapper">
+<form method="post" action="inquiry_course.jsp">
+	<label>영역 : 	</label>
+    <select name="selected_type" required>
+    			<option value="" disabled selected>분류 선택</option>
+    			<option value="major">전공</option>
+				<option value="required">교양필수</option>
+				<option value="ge">일반교양</option> 
+    </select>
+	<input type="submit" value="조회">
+</form>
+</div>
 <div class="insert_wrapper">
 <h3><%=nYear %>년 <%= nSemester %>학기 수강신청</h3>
 <div class="table">
 <div class="row header">
-<div class="cell">과목번호</div>
-<div class="cell">분반</div>
-<div class="cell">담당교수</div>
-<div class="cell">과목명</div>
-<div class="cell">학점</div>
-<div class="cell">최대 수강인원</div>
-<div class="cell">여석</div>
-<div class="cell">수강신청</div>
+<div class="cell" >과목번호</div>
+<div class="cell" >분반</div>
+<div class="cell" >담당교수</div>
+<div class="cell" >과목명</div>
+<div class="cell" >학점</div>
+<div class="cell" >정원</div>
+<div class="cell" >여석</div>
+<div class="cell" style ="border-right-style: none;">수강신청</div>
 </div>
 <%	
 	mySQL = "select c.c_id,c.c_id_no,c.c_name,c.c_unit, t.t_professor, t.t_max, t.t_left from course c, teach t where c.c_id not in (select c_id from enroll where s_id='" + session_id + "' and e_gpa>=2.7) and t.t_year=" + nYear+" and t.t_semester="+nSemester+" and t.c_id=c.c_id and t.c_id_no = c.c_id_no";
@@ -83,14 +94,19 @@
 			int c_unit = myResultSet.getInt("c_unit");
 			%>
 			<div class="row">
-				<div class="cell" align="center"><%=c_id %></div>
-				<div class="cell" align="center"><%=c_id_no %></div>
-				<div class="cell" align="center"><%=t_professor %></div>				
-				<div class="cell" align="center"><%=c_name %></div>
-				<div class="cell" align="center"><%=c_unit %></div>
-				<div class="cell" align="center"><%=t_max %></div>
-				<div class="cell" align="center"><%=t_left %></div>
-				<div class="cell" align="center"><a href="insert_verify.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>">신청</a></div>
+				<div class="cell"><%=c_id %></div>
+				<div class="cell"><%=c_id_no %></div>
+				<div class="cell"><%=t_professor %></div>				
+				<div class="cell"><%=c_name %></div>
+				<div class="cell"><%=c_unit %></div>
+				<div class="cell"><%=t_max %></div>
+				<div class="cell"><%=t_left %></div>
+				<% if(t_left != 0) {%>
+				<div class="cell" style ="border-right-style: none;"><a href="insert_verify.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>" class="badge text-bg-primary">신청</a></div>
+				
+				<% }else {%>
+				<div class="cell" style ="border-right-style: none;"><a href="insert_verify.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>" class="badge text-bg-danger">신청 불가</a></div>
+				<%} %>
 			</div>
 <% 				
 		}

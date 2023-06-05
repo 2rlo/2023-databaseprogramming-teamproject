@@ -18,7 +18,7 @@
 		<a href="update.jsp">사용자 정보 수정</a>
 		<a href="insert.jsp">수강신청 입력</a>
 		<a href="delete.jsp">수강신청 삭제</a>
-		<a href="course_check.jsp">수강신청 조회</a>
+		<a href="select.jsp">수강신청 조회</a>
 		<span class="current-bar"></span>
 </nav>
 </body>
