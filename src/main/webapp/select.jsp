@@ -11,9 +11,6 @@
 <%@ include file="top.jsp"%>
 <% if (session_id==null) response.sendRedirect("login.jsp"); %>
 
-
-<br>
-
 <%  
 Connection myConn = null;
 Statement stmt = null;
@@ -27,6 +24,7 @@ String dbdriver = "oracle.jdbc.driver.OracleDriver";
 
 int nYear=0;
 int nSemester=0;
+int selectSemester=0;
 int count=0;
 int u_sum=0;
 
@@ -54,30 +52,41 @@ try {
 }
 %>
 
-<div>
-<form method="get" align="center" action="select_verify.jsp" >
-<div>
-    <select name="selected_year" required>
-    			<option value="" disabled selected>연도 선택</option>
-    			<option value=<%= nYear %>><%= nYear %></option>
-				<option value=<%= nYear -1 %> ><%= nYear - 1 %></option>
-				<option value=<%= nYear - 2 %>><%= nYear - 2 %></option>
-				<option value=<%= nYear - 3%>><%= nYear - 3 %></option>
-				<option value=<%= nYear - 4%>><%= nYear - 4 %></option> 
-    </select>
-    <label>년도</label>
-
-    <select name="selected_semester" placeholder="학기" required>
-    
-    <option value="" disabled selected>학기 선택</option>
-		<option value="1">1</option>
-		<option value="2">2</option> 
-
-	</select>
-    <label>학기</label>
-	<input type="submit" value="조회">
- </div>
-</form>
+<div class="sec-center" style="width: 70%;">
+	<input class="dropdown" type="checkbox" id="dropdown" name="dropdown"/>
+	<label class="for-dropdown" for="dropdown" style="font-size:15px; font-weight:700; height:40px;">조회 기간 선택</label>
+		<div class="section-dropdown">
+		<input class="dropdown-sub" type="checkbox" id="dropdown-sub" name="dropdown-sub"/>
+		  	<label class="for-dropdown-sub" for="dropdown-sub"><%= nYear %></label>
+	  		<div class="section-dropdown-sub"> 
+	  			<a href="select_verify.jsp?selected_year=<%= nYear %>&selected_semester=1" class="dropdown_a">1학기</a>
+	  			<a href="select_verify.jsp?selected_year=<%= nYear %>&selected_semester=2" class="dropdown_a">2학기</a>
+			</div>
+		<input class="dropdown-sub" type="checkbox" id="dropdown-sub2" name="dropdown-sub2"/>
+		  	<label class="for-dropdown-sub" for="dropdown-sub2"><%= nYear-1 %></label>
+	  		<div class="section-dropdown-sub"> 
+	  			<a href="select_verify.jsp?selected_year=<%= nYear-1 %>&selected_semester=1" class="dropdown_a">1학기</a>
+	  			<a href="select_verify.jsp?selected_year=<%= nYear-1 %>&selected_semester=2" class="dropdown_a">2학기</a>
+			</div>
+		<input class="dropdown-sub" type="checkbox" id="dropdown-sub3" name="dropdown-sub3"/>
+		  	<label class="for-dropdown-sub" for="dropdown-sub3"><%= nYear-2 %></label>
+	  		<div class="section-dropdown-sub"> 
+	  			<a href="select_verify.jsp?selected_year=<%= nYear-2 %>&selected_semester=1" class="dropdown_a">1학기</a>
+	  			<a href="select_verify.jsp?selected_year=<%= nYear-2 %>&selected_semester=2" class="dropdown_a">2학기</a>
+			</div>
+		<input class="dropdown-sub" type="checkbox" id="dropdown-sub4" name="dropdown-sub4"/>
+		  	<label class="for-dropdown-sub" for="dropdown-sub4"><%= nYear-3 %></label>
+	  		<div class="section-dropdown-sub"> 
+	  			<a href="select_verify.jsp?selected_year=<%= nYear-3 %>&selected_semester=1" class="dropdown_a">1학기</a>
+	  			<a href="select_verify.jsp?selected_year=<%= nYear-3 %>&selected_semester=2" class="dropdown_a">2학기</a>
+			</div>	
+		<input class="dropdown-sub" type="checkbox" id="dropdown-sub5" name="dropdown-sub5"/>
+		  	<label class="for-dropdown-sub" for="dropdown-sub5"><%= nYear-4 %></label>
+	  		<div class="section-dropdown-sub"> 
+	  			<a href="select_verify.jsp?selected_year=<%= nYear-4 %>&selected_semester=1" class="dropdown_a">1학기</a>
+	  			<a href="select_verify.jsp?selected_year=<%= nYear-4 %>&selected_semester=2" class="dropdown_a">2학기</a>
+			</div>							
+		</div>
 </div>
 
 

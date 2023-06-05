@@ -561,7 +561,7 @@ position: relative;
 .section-dropdown-sub {
   position: relative;
   display: block;
-  width: 10%;
+  width: 100%;
   pointer-events: none;
   opacity: 0;
   max-height: 0;
