@@ -9,18 +9,18 @@
 </head>
 <body>
 <%@ include file="top.jsp" %>
-<% if (session_id == null) response.sendRedirect("login.jsp"); %>
-<div class="wrapper">
+<% if (session_id == null) response.sendRedirect("login.jsp"); 
+String Search = request.getParameter("search");
+%>
+<div style="margin-bottom:15px;">
 	<form method="post" action="search.jsp" class="search_form">
 	<div class="search_container">
-	<input type="text" class="search" placeholder="검색어" name="search" />
+	<input type="text" class="search" placeholder="검색어" value="<%=Search %>" name="search" />
 	<input TYPE="SUBMIT" NAME="Submit" class="search_button rounded" value="검색"/>
 	</div>
 	</form>
 </div>
 <%
-	String Search = request.getParameter("search");
-
 	Connection myConn = null;
 	Statement stmt = null;
 	ResultSet myResultSet = null;
@@ -53,6 +53,19 @@
 		System.err.println("SQLException: "+ ex.getMessage());
 	}
 %>
+<div class="select_wrapper">
+<form method="post" action="inquiry_course.jsp">
+	<label>영역 : 	</label>
+    <select name="selected_type" required>
+    			<option value="" disabled selected>분류 선택</option>
+    			<option value="major">전공</option>
+				<option value="required">교양필수</option>
+				<option value="ge">일반교양</option> 
+    </select>
+	<input type="submit" value="조회">
+</form>
+</div>
+
 <div class="insert_wrapper">
 <h3><%=nYear %>년 <%= nSemester %>학기 수강신청</h3>
 <div class="table">
