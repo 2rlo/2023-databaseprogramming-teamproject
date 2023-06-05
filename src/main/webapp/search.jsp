@@ -62,12 +62,12 @@
 <div class="cell">담당교수</div>
 <div class="cell">과목명</div>
 <div class="cell">학점</div>
-<div class="cell">최대 수강인원</div>
+<div class="cell">정원</div>
 <div class="cell">여석</div>
 <div class="cell">수강신청</div>
 </div>
 <%
-	mySQL = "SELECT c.c_id, c.c_id_no, t.t_professor, c.c_name, c.c_unit, t.t_max, t.t_left from course c, teach t where c.c_name like '%"+Search+"%' OR c.c_id = (SELECT c_id from teach where t_professor like '%"+Search+"%')";
+	mySQL = "SELECT c.c_id, c.c_id_no, t.t_professor, c.c_name, c.c_unit, t.t_max, t.t_left from course c, teach t where c.c_id not in (select c_id from enroll where s_id='" + session_id + "' and e_gpa>=2.7) and t.t_year=" + nYear+" and t.t_semester="+nSemester+" and t.t_semester="+nSemester+" and t.c_id=c.c_id and t.c_id_no = c.c_id_no and (c.c_name like '%"+Search+"%' OR t.t_professor like '%"+Search+"%')";
 	
 	myResultSet = stmt.executeQuery(mySQL);
 	
