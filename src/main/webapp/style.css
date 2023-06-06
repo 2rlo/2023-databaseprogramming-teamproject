@@ -260,52 +260,6 @@ nav a:nth-child(5):hover ~ .current-bar {
 	margin: 0 auto;
 }
 
-/* update form */
-.update_button_wrapper {
-	margin: 0 auto;
-	display: flex;
-	align-items: center;
-	flex-direction:row;
-	justify-content: center;
-}
-.update_wrapper {
-padding: 40px;
-  width: 35%;
-  display: flex;
-}
-.update_label {
-	color: #7369AB;
-}
-
-.update_input {
-	display: block;
-    margin-bottom: 20px;
-    border: 1px solid #E5E9F5;
-    background-color: #F6F7FA;
-    padding: 20px;
-    margin-top: 10px;
-    border-radius: 10px;
-    width: 100%;
-}
-
-.update_button {
-	margin-left: 25px;
-	padding: 16px 75px;
-    background-color: #fa5a5a;
-    border-radius: 10px;
-    border: 0px;
-    color: white;
-    height: 9rem;
-}
-
-.update_button:hover {
-	background-color: #ff6678;
-}
-
-.update_form {
-	width: 100%;
-}
-
 /* delete button */
 .delete_button {
 	background-color: #0080ff;
@@ -594,6 +548,75 @@ position: relative;
 }
 .section-dropdown-sub a .uil {
   font-size: 20px;
+}
+
+/* update form */
+.update_page {
+	width: 600px;
+  	padding: 2% 0 0;
+  	margin: auto;
+}
+.update_container {
+	position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 600px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.update_input {
+  height: 20px;
+  width: 100%;
+  border: 1px solid #c0c0c0;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 16px;
+  margin-bottom: 10px;
+}
+
+.update_label {
+	margin-left: 5px;
+	margin-bottom: 8px;
+  pointer-events: none;
+}
+
+.update_input:focus {
+  outline: none;
+  border: 2px solid #ea6153;
+}
+
+.update_input:focus + .update_input .text, :not(input[value=""]) + .update_input .text {
+  font-size: 12px;
+  transform: translate(0, -150%);
+  background-color: white;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.update_label:focus{
+  color: #ea6153;
+}
+
+.update_button {
+	 text-transform: uppercase;
+  outline: 0;
+  background: #ea6153;
+  width: 100%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  margin-top: 15px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+.update_button:hover,.update_button:active,.update_button:focus {
+  background: #ea2b15;
 }
 
 /* login form */

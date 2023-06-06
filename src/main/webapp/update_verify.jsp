@@ -8,10 +8,14 @@
 <title>사용자 정보 수정</title>
 </head>
 <body>
+<%@ include file="top.jsp" %>
 <%
-String s_id = request.getParameter("s_id");
-String s_addr = request.getParameter("s_addr");
 String s_pwd = request.getParameter("s_pwd");
+String s_addr = request.getParameter("s_addr");
+String s_mail = request.getParameter("s_mail");
+String s_phone = request.getParameter("s_phone");
+String exist_pwd = request.getParameter("exist_pwd");
+String after_s_pwd = request.getParameter("after_s_pwd");
 
 Connection myConn = null;
 Statement stmt = null;
@@ -22,6 +26,9 @@ String user=System.getenv("user");
 String passwd = System.getenv("passwd");
 String dbdriver = "oracle.jdbc.driver.OracleDriver";
 
+System.out.println(s_pwd);
+System.out.println(exist_pwd);
+
 try {
 Class.forName(dbdriver);
 myConn = DriverManager.getConnection(dburl, user, passwd);
@@ -30,9 +37,17 @@ stmt=myConn.createStatement();
 System.err.println("SQLException: "+ex.getMessage());
 }
 
+if(!s_pwd.equals(exist_pwd)){%>
+	<script>
+	alert("기존 비밀번호가 일치하지 않습니다.");
+	location.href="update.jsp";
+	</script>
+	
+<%}
+else {
 try {
-mySQL = "update student set s_addr='"+s_addr+"', s_pwd='"+s_pwd+"' where s_id='"+s_id+"'";
-stmt.execute(mySQL);
+	mySQL = "update student set s_addr='"+s_addr+"', s_pwd='"+after_s_pwd+"', s_mail='"+s_mail+"', s_phone='"+s_phone+"' where s_id='"+session_id+"'";
+	stmt.execute(mySQL);
 %>
 <script>
 alert("학생정보가 수정되었습니다.");
@@ -51,10 +66,10 @@ location.href="update.jsp";
 </script>
 <%
 }
-
 finally{
 if(stmt!=null)try{stmt.close(); myConn.close();}
 catch(SQLException ex) { }
+}
 }
 %>
 </body>

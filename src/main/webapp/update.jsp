@@ -10,6 +10,7 @@
 <body>
 <%@ include file="top.jsp" %>
 <% if (session_id==null) response.sendRedirect("login.jsp"); %>
+
 <% Connection myConn = null;
 Statement stmt = null;
 String mySQL = null;
@@ -21,31 +22,45 @@ String dbdriver = "oracle.jdbc.driver.OracleDriver";
 
 String s_addr = null;
 String s_pwd = null;
+String s_mail = null;
+String s_phone = null;
 
 Class.forName(dbdriver);
 myConn=DriverManager.getConnection(dburl, user, passwd);
 stmt = myConn.createStatement();
-mySQL = "select s_addr, s_pwd from student where s_id='"+session_id+"'";
+mySQL = "select s_addr, s_pwd, s_mail, s_phone from student where s_id='"+session_id+"'";
 
 ResultSet myResultSet = stmt.executeQuery(mySQL);
 if(myResultSet.next()){
 	s_addr = myResultSet.getString("s_addr");
 	s_pwd = myResultSet.getString("s_pwd");
-
+	s_mail = myResultSet.getString("s_mail");
+	s_phone = myResultSet.getString("s_phone");
 %>
-<div class="update_button_wrapper">
-<div class="update_wrapper">
-<form class="update_form" method="post" action="update_verify.jsp">
-<input type="hidden" name="s_id" size="30" value="<%=session_id%>">
-<label class="update_label">주소</label>
-<input class="update_input" type="text" name="s_addr" size="50" value="<%=s_addr%>">
-<label class="update_label">비밀번호</label>
-<input class="update_input"type="text" name="s_pwd" size="50" value="<%=s_pwd%>">
+
+<div class="update_page">
+	<div class="update_container">
+		<form method="post" action="update_verify.jsp" style="display:flex; flex-direction:column; align-items:flex-start;">
+			<input type="hidden" value="<%=s_pwd %>" name="s_pwd"/>
+			<a class="update_label">ID</a>
+			<input type="text" class="update_input rounded" value="<%=session_id%>" disabled/>
+			<a class="update_label">주소</a>
+			<input type="text" class="update_input rounded" value="<%=s_addr %>" name="s_addr"/>
+			<a class="update_label">EMAIL</a>			
+			<input type="email" class="update_input rounded" value="<%=s_mail %>" name="s_mail"/>
+			<a class="update_label">전화번호</a>			
+			<input type="tel" class="update_input rounded" value="<%=s_phone %>" name="s_phone"/>
+			<a class="update_label">기존 비밀번호</a>			
+			<input type="password" class="update_input rounded" name="exist_pwd"/>
+			<a class="update_label">새 비밀번호</a>			
+			<input type="password" class="update_input rounded" name="after_s_pwd"/>
+			<input class="update_button" onclick="alertButton();" type="submit" value="수정">
+		</form>
+	</div>
 </div>
 <%
 }
 stmt.close(); myConn.close();
 %>
-<input class="update_button" type="submit" value="수정">
-</form></div></body>
+</body>
 </html>
