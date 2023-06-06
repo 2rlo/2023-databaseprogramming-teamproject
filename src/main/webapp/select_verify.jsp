@@ -71,30 +71,39 @@
 	<input class="dropdown" type="checkbox" id="dropdown" name="dropdown"/>
 	<label class="for-dropdown" for="dropdown" style="font-size:15px; font-weight:700; height:40px;">조회 기간 선택</label>
 		<div class="section-dropdown">
+		<div>
 		<input class="dropdown-sub" type="checkbox" id="dropdown-sub" name="dropdown-sub"/>
 		  	<label class="for-dropdown-sub" for="dropdown-sub"><%= nYear %></label>
 	  		<div class="section-dropdown-sub"> 
 	  			<a href="select_verify.jsp?selected_year=<%= nYear %>&selected_semester=1" class="dropdown_a">1학기</a>
 	  			<a href="select_verify.jsp?selected_year=<%= nYear %>&selected_semester=2" class="dropdown_a">2학기</a>
 			</div>
+		</div>
+		<div>
 		<input class="dropdown-sub" type="checkbox" id="dropdown-sub2" name="dropdown-sub2"/>
 		  	<label class="for-dropdown-sub" for="dropdown-sub2"><%= nYear-1 %></label>
 	  		<div class="section-dropdown-sub"> 
 	  			<a href="select_verify.jsp?selected_year=<%= nYear-1 %>&selected_semester=1" class="dropdown_a">1학기</a>
 	  			<a href="select_verify.jsp?selected_year=<%= nYear-1 %>&selected_semester=2" class="dropdown_a">2학기</a>
 			</div>
+		</div>
+		<div>
 		<input class="dropdown-sub" type="checkbox" id="dropdown-sub3" name="dropdown-sub3"/>
 		  	<label class="for-dropdown-sub" for="dropdown-sub3"><%= nYear-2 %></label>
 	  		<div class="section-dropdown-sub"> 
 	  			<a href="select_verify.jsp?selected_year=<%= nYear-2 %>&selected_semester=1" class="dropdown_a">1학기</a>
 	  			<a href="select_verify.jsp?selected_year=<%= nYear-2 %>&selected_semester=2" class="dropdown_a">2학기</a>
 			</div>
+		</div>
+		<div>
 		<input class="dropdown-sub" type="checkbox" id="dropdown-sub4" name="dropdown-sub4"/>
 		  	<label class="for-dropdown-sub" for="dropdown-sub4"><%= nYear-3 %></label>
 	  		<div class="section-dropdown-sub"> 
 	  			<a href="select_verify.jsp?selected_year=<%= nYear-3 %>&selected_semester=1" class="dropdown_a">1학기</a>
 	  			<a href="select_verify.jsp?selected_year=<%= nYear-3 %>&selected_semester=2" class="dropdown_a">2학기</a>
-			</div>	
+			</div>
+		</div>
+		<div>	
 		<input class="dropdown-sub" type="checkbox" id="dropdown-sub5" name="dropdown-sub5"/>
 		  	<label class="for-dropdown-sub" for="dropdown-sub5"><%= nYear-4 %></label>
 	  		<div class="section-dropdown-sub"> 
@@ -103,9 +112,10 @@
 			</div>							
 		</div>
 </div>
+</div>
 
 	<div class="insert_wrapper">
-		<h3><%=nYear %>년 <%= nSemester %>학기 수강신청</h3>
+		<h3><%=s_year %>년 <%=s_semester%>학기</h3>
 
 <div class="table" style="margin-bottom:0;">
 <div class="row header">
