@@ -57,7 +57,7 @@
 %>
 <div class="sec-center">
 	<input class="dropdown" type="checkbox" id="dropdown" name="dropdown"/>
-	<label class="for-dropdown" for="dropdown">영역 선택</label>
+	<label class="for-dropdown" for="dropdown">전체 조회</label>
 		<div class="section-dropdown">
 			<a href="inquiry_course.jsp?option=all" class="dropdown_a">전체</a>
 			<a href="inquiry_course.jsp?option=major" class="dropdown_a">전공</a>

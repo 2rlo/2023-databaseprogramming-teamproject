@@ -54,10 +54,9 @@ try{
 	myResultSet = stmt.executeQuery(mySQL);
 	
 	if (myResultSet != null)
-	{ 
-	if(!myResultSet.next()) {%>
-	 <h3>신청과목이 없습니다.</h3>
-	 <%} else {%>
+	{ if(!myResultSet.next()){
+	%> <h3 style="text-align: center;">신청 과목이 없습니다.</h3>
+	<%} else { %>
 	<div class="table">
 	<div class="row header">
 	<div class="cell">과목번호</div>
@@ -68,13 +67,29 @@ try{
 	<div class="cell">수강 취소</div>
 	</div>
 	<%
+	String c_id = myResultSet.getString("c_id");
+	int c_id_no = myResultSet.getInt("c_id_no");
+	String t_professor = myResultSet.getString("t_professor");
+	String c_name = myResultSet.getString("c_name");
+	int c_unit = myResultSet.getInt("c_unit");
+	%>
+	<div class="row">
+		<div class="cell" align="center"><%=c_id %></div>
+		<div class="cell" align="center"><%=c_id_no %></div>
+		<div class="cell" align="center"><%=t_professor %></div>				
+		<div class="cell" align="center"><%=c_name %></div>
+		<div class="cell" align="center"><%=c_unit %></div>
+		<div class="cell" align="center">
+			<button class="delete_button rounded" onclick="location.href='delete_verify.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>'">취소</button></div>
+	</div>
+	<%
 		while (myResultSet.next())
 		{
-			String c_id = myResultSet.getString("c_id");
-			int c_id_no = myResultSet.getInt("c_id_no");
-			String t_professor = myResultSet.getString("t_professor");
-			String c_name = myResultSet.getString("c_name");
-			int c_unit = myResultSet.getInt("c_unit");
+			c_id = myResultSet.getString("c_id");
+			c_id_no = myResultSet.getInt("c_id_no");
+			t_professor = myResultSet.getString("t_professor");
+			c_name = myResultSet.getString("c_name");
+			c_unit = myResultSet.getInt("c_unit");
 			%>
 			<div class="row">
 				<div class="cell" align="center"><%=c_id %></div>
