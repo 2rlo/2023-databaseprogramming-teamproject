@@ -6,7 +6,6 @@
 <head>
 <meta charset="UTF-8">
 <title>수강신청 조회</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
 </head>
 <body>
 <%@ include file="top.jsp" %>
@@ -68,9 +67,7 @@
 	//myResultSet = stmt.executeQuery(mySQL);
 	
 	%>
-	<div class="insert_wrapper">
-		<h3><%=nYear %>년 <%= nSemester %>학기 수강신청</h3>	
-	<div class="sec-center" style="width: 70%;">
+		<div class="sec-center" style="margin-bottom: 17px">
 	<input class="dropdown" type="checkbox" id="dropdown" name="dropdown"/>
 	<label class="for-dropdown" for="dropdown" style="font-size:15px; font-weight:700; height:40px;">조회 기간 선택</label>
 		<div class="section-dropdown">
@@ -106,7 +103,11 @@
 			</div>							
 		</div>
 </div>
-<div class="table">
+
+	<div class="insert_wrapper">
+		<h3><%=nYear %>년 <%= nSemester %>학기 수강신청</h3>
+
+<div class="table" style="margin-bottom:0;">
 <div class="row header">
 <div class="cell" >과목번호</div>
 <div class="cell" >분반</div>
@@ -143,7 +144,6 @@
 				<%}else{ %>
 				<div class="cell"><%=e_gpa %></div>
 	
-			</div>
 				<%} 
 				
 				mySQL_re = "select count(*) from enroll where s_id ='" + session_id+"' and c_id = '"+ c_id + "'";
@@ -153,29 +153,36 @@
 				
 					int cnt = myResultSet_re.getInt(1);
 					if (cnt > 1){%>
-						<div class="cell">재수강</div>
+						<div class="cell">재수강</div></div>
 					<%} else {%>
-						<div class="cell"></div>
+						<div class="cell"></div></div>
 					<%}
 				}%>	
 			
 		
 	<%
 		}
+		%>
+		</div>
+	<%
 	}
-	
 	if (count == 0) {
 	%>
-		<div align="center" colspan="8">조회된 수업이 없습니다.</div>
+		<div align="center">조회된 수업이 없습니다.</div>
 	<%
 	}else{
 	%>
-		<div class="row">
-			<div class="cell">총 신청과목 수</div>
+		<div class="table">
+			<div class="column">
+			<div class="cell_header">총 신청과목 수</div>
 			<div class="cell"><%=count %></div>
-		<div class="row">
-			<div class="cell">총 신청학점</div>
+			</div>
+			<div class="column">
+			<div class="cell_header">총 신청학점</div>
 			<div class="cell"><%=u_sum %></div>
+			</div>
+	</div>
+	</div>
 	<%
 	}
 if(myResultSet != null) myResultSet.close();
@@ -185,7 +192,6 @@ if(myConn != null) myConn.close();
 	/* stmt.close();
 	myConn.close(); */
 %>
-</div>
 </div>
 </body>
 </html>

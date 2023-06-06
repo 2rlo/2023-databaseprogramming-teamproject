@@ -52,7 +52,7 @@ try {
 }
 %>
 
-<div class="sec-center" style="width: 70%;">
+<div class="sec-center">
 	<input class="dropdown" type="checkbox" id="dropdown" name="dropdown"/>
 	<label class="for-dropdown" for="dropdown" style="font-size:15px; font-weight:700; height:40px;">조회 기간 선택</label>
 		<div class="section-dropdown">

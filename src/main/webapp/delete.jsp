@@ -47,22 +47,27 @@ try{
 %>
 <div class="insert_wrapper">
 <h3><%=nYear %>년 <%= nSemester %>학기 신청 과목</h3>
-<div class="table">
-<div class="row header">
-<div class="cell">과목번호</div>
-<div class="cell">분반</div>
-<div class="cell">담당교수</div>
-<div class="cell">과목명</div>
-<div class="cell">학점</div>
-<div class="cell">수강 취소</div>
-</div>
+
 <%
 	mySQL = "select c.c_id, c.c_id_no, c.c_name, c.c_unit, t.t_professor from course c, enroll e, teach t where e.s_id='" + session_id+"' and e.c_id = c.c_id and e.c_id_no = c.c_id_no and e.e_year=" + nYear+" and e.e_semester="+nSemester+"and t.c_id =c.c_id and t.c_id_no = c.c_id_no and t.t_year=" + nYear+" and t.t_semester="+nSemester+"";
 
 	myResultSet = stmt.executeQuery(mySQL);
 	
 	if (myResultSet != null)
-	{
+	{ 
+	if(!myResultSet.next()) {%>
+	 <h3>신청과목이 없습니다.</h3>
+	 <%} else {%>
+	<div class="table">
+	<div class="row header">
+	<div class="cell">과목번호</div>
+	<div class="cell">분반</div>
+	<div class="cell">담당교수</div>
+	<div class="cell">과목명</div>
+	<div class="cell">학점</div>
+	<div class="cell">수강 취소</div>
+	</div>
+	<%
 		while (myResultSet.next())
 		{
 			String c_id = myResultSet.getString("c_id");
@@ -78,13 +83,12 @@ try{
 				<div class="cell" align="center"><%=c_name %></div>
 				<div class="cell" align="center"><%=c_unit %></div>
 				<div class="cell" align="center">
-					<button class="delete_button rounded" href="delete_verify.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>">취소</button></div>
+					<button class="delete_button rounded" onclick="location.href='delete_verify.jsp?c_id=<%=c_id%>&c_id_no=<%=c_id_no%>'">취소</button></div>
 			</div>
 			<%
 		}
 	}
-	else
-	{}
+	}
 	stmt.close();
 	myConn.close();
 %>

@@ -37,6 +37,19 @@
   }
 }
 
+.column {
+	display: contents;
+	background: #f6f6f6;
+}
+
+.cell_header {
+	font-weight: 900;
+  color: #ffffff;
+  background: #ea6153;
+  display: table-cell;
+  text-align: center;
+}
+
 .row {
   display: table-row;
   background: #f6f6f6;
@@ -51,6 +64,7 @@
   border-right-style: solid;
   border-right-color: #ffffff;
 }
+
 @media screen and (max-width: 580px) {
   .row {
     padding: 14px 0 7px;
