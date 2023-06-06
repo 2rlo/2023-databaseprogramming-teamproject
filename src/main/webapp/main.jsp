@@ -9,18 +9,15 @@
 <body>
 <%@include file="top.jsp" %>
 <% if(session_id != null) {%>
-<table width = "75%" align="center" height="100%">
-<tr>
-	<td align="center"><%=session_id%>님 방문을 환영합니다.</td>
-</tr>
+<div class="insert_wrapper" style="align-items:center;">
+<h3><%=session_id%>님 방문을 환영합니다.</h3>
+</div>
 <% }else { %>
-<table width = "75%" align="center" height="100%">
-<tr>
-<td align="center">로그인 후 사용하세요.</td>
-</tr>
+<div class="insert_wrapper" style="align-items:center;">
+<h3>로그인 후 사용하세요.</h3>
+</div>
 <%
 }
 %>
-</table>
 </body>
 </html>

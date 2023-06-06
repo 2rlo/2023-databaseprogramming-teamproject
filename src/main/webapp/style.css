@@ -595,3 +595,75 @@ position: relative;
 .section-dropdown-sub a .uil {
   font-size: 20px;
 }
+
+/* login form */
+.login_page {
+	width: 500px;
+  padding: 14% 0 0;
+  margin: auto;
+}
+.login_container {
+	position: relative;
+  z-index: 1;
+  background: #FFFFFF;
+  max-width: 500px;
+  margin: 0 auto 100px;
+  padding: 45px;
+  text-align: center;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.2), 0 5px 5px 0 rgba(0, 0, 0, 0.24);
+}
+
+.login_input {
+  height: 20px;
+  width: 90%;
+  border: 1px solid #c0c0c0;
+  border-radius: 4px;
+  box-sizing: border-box;
+  padding: 16px;
+  margin-bottom: 10px;
+}
+
+.login_label {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  pointer-events: none;
+}
+
+.login_input:focus {
+  outline: none;
+  border: 2px solid #ea6153;
+}
+
+.login_input:focus + .login_input .text, :not(input[value=""]) + .login_input .text {
+  font-size: 12px;
+  transform: translate(0, -150%);
+  background-color: white;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+.login_label:focus{
+  color: #ea6153;
+}
+
+.login_button {
+	 text-transform: uppercase;
+  outline: 0;
+  background: #ea6153;
+  width: 90%;
+  border: 0;
+  padding: 15px;
+  color: #FFFFFF;
+  font-size: 14px;
+  -webkit-transition: all 0.3 ease;
+  transition: all 0.3 ease;
+  cursor: pointer;
+}
+
+.login_button:hover,.login_button:active,.login_button:focus {
+  background: #ea2b15;
+}

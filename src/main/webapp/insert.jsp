@@ -113,7 +113,6 @@
 	}
 	else
 	{
-		System.out.println("test");
 	}
 	stmt.close();
 	myConn.close();
