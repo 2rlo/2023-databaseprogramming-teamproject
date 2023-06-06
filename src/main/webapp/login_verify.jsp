@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="java.sql.*" %>
+<body style="background: #fff;">
 <% 
 	String userID = request.getParameter("userID");
 	String userPassword = request.getParameter("userPassword");
@@ -27,7 +28,7 @@
 	}else {
 		%>
 		<script>
-		alert("사용자 아이디 혹은 암호가 틀렸습니다.");
+		alert("사용자 아이디 혹은 암호가 틀렸습니다");
 		location.href="login.jsp";
 		</script>
 <%
@@ -35,3 +36,4 @@
 	stmt.close();
 	myConn.close();
 %>
+</body>
