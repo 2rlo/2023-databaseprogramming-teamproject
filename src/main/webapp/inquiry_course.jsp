@@ -57,7 +57,9 @@
 <div class="sec-center">
 	<input class="dropdown" type="checkbox" id="dropdown" name="dropdown"/>
 	<label class="for-dropdown" for="dropdown">
-	<% if(type.equals("required")){ // c_id : 'R'%>
+	<% if (type.equals("all")) { %>
+		전체 조회
+	<% } else if(type.equals("required")){ // c_id : 'R'%>
 		교양 필수 조회
 	<%} else if(type.equals("ge")){ // 'G' %>
 		일반 교양 조회
@@ -66,6 +68,7 @@
 	<%}%>
 	</label>
 		<div class="section-dropdown">
+			<a href="inquiry_course.jsp?option=all" class="dropdown_a">전체</a>		
 			<a href="inquiry_course.jsp?option=major" class="dropdown_a">전공</a>
 			<a href="inquiry_course.jsp?option=required" class="dropdown_a">교양필수</a>
 			<a href="inquiry_course.jsp?option=ge" class="dropdown_a">일반교양</a>			
@@ -85,7 +88,10 @@
 <div class="cell">수강신청</div>
 </div>
 <%
-	if(type.equals("required")){ // c_id : 'R'
+	if (type.equals("all")){
+		mySQL = "select c.c_id,c.c_id_no,c.c_name,c.c_unit, t.t_professor, t.t_max, t.t_left from course c, teach t where c.c_id not in (select c_id from enroll where s_id='" + session_id + "' and e_gpa>=2.7) and t.t_year=" + nYear+" and t.t_semester="+nSemester+" and t.c_id=c.c_id and t.c_id_no = c.c_id_no";
+	}
+	else if(type.equals("required")){ // c_id : 'R'
 		mySQL = "select c.c_id,c.c_id_no,c.c_name,c.c_unit, t.t_professor, t.t_max, t.t_left from course c, teach t where c.c_id not in (select c_id from enroll where s_id='" 
 		+ session_id + "' and e_gpa>=2.7) and t.t_year=" + nYear+" and t.t_semester="+nSemester+" and t.c_id=c.c_id and t.c_id_no = c.c_id_no and "
 		+ "c.c_id like 'r%'";

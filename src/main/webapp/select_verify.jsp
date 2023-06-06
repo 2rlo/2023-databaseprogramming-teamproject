@@ -68,38 +68,55 @@
 	//myResultSet = stmt.executeQuery(mySQL);
 	
 	%>
-	<br>
-	<h3 align="center"><%=s_year %>년 <%= s_semester %>학기 수강조회</h3>
-	
-	<div class="row d-flex justify-content-center">
-	<form method="get" align="center" action="select_verify.jsp" >
-	<div class="row mb-3 col-md-6" style="float:none; margin:0 auto" >
-    <select name="selected_year" id="selected_year" class="form-select" required  style="width: 120px">
-    			<option value="" disabled selected>연도 선택</option>
-    			<option value=<%= nYear %>><%= nYear %></option>
-				<option value=<%= nYear -1 %> ><%= nYear - 1 %></option>
-				<option value=<%= nYear - 2 %>><%= nYear - 2 %></option>
-				<option value=<%= nYear - 3%>><%= nYear - 3 %></option>
-				<option value=<%= nYear - 4%>><%= nYear - 4 %></option> 
-    </select>
-    <label for="selected_year" class="col-sm-2 col-form-label">년도</label>
-
-    <select name="selected_semester" id="selected_semester" class="form-select" placeholder="학기" required style="width: 120px">
-    
-    <option value="" disabled selected>학기 선택</option>
-	<option value="1">1</option>
-	<option value="2">2</option> 
-
-	</select>
-    <label for="selected_semester" class="col-sm-2 col-form-label">학기</label>
-	<input type="submit" value="조회" class="col-md-2 btn btn-primary ">
- 	</div>
-	</form>
-	</div>
-	
-	<table width="75%" align="center" border class="table table-bordered">
-	<br>
-	<tr align="center"><th>과목번호</th><th>분반</th><th>과목명</th><th>학점</th><th>시간</th><th>장소</th><th>등급</th><th>비고</th></tr>
+	<div class="insert_wrapper">
+		<h3><%=nYear %>년 <%= nSemester %>학기 수강신청</h3>	
+	<div class="sec-center" style="width: 70%;">
+	<input class="dropdown" type="checkbox" id="dropdown" name="dropdown"/>
+	<label class="for-dropdown" for="dropdown" style="font-size:15px; font-weight:700; height:40px;">조회 기간 선택</label>
+		<div class="section-dropdown">
+		<input class="dropdown-sub" type="checkbox" id="dropdown-sub" name="dropdown-sub"/>
+		  	<label class="for-dropdown-sub" for="dropdown-sub"><%= nYear %></label>
+	  		<div class="section-dropdown-sub"> 
+	  			<a href="select_verify.jsp?selected_year=<%= nYear %>&selected_semester=1" class="dropdown_a">1학기</a>
+	  			<a href="select_verify.jsp?selected_year=<%= nYear %>&selected_semester=2" class="dropdown_a">2학기</a>
+			</div>
+		<input class="dropdown-sub" type="checkbox" id="dropdown-sub2" name="dropdown-sub2"/>
+		  	<label class="for-dropdown-sub" for="dropdown-sub2"><%= nYear-1 %></label>
+	  		<div class="section-dropdown-sub"> 
+	  			<a href="select_verify.jsp?selected_year=<%= nYear-1 %>&selected_semester=1" class="dropdown_a">1학기</a>
+	  			<a href="select_verify.jsp?selected_year=<%= nYear-1 %>&selected_semester=2" class="dropdown_a">2학기</a>
+			</div>
+		<input class="dropdown-sub" type="checkbox" id="dropdown-sub3" name="dropdown-sub3"/>
+		  	<label class="for-dropdown-sub" for="dropdown-sub3"><%= nYear-2 %></label>
+	  		<div class="section-dropdown-sub"> 
+	  			<a href="select_verify.jsp?selected_year=<%= nYear-2 %>&selected_semester=1" class="dropdown_a">1학기</a>
+	  			<a href="select_verify.jsp?selected_year=<%= nYear-2 %>&selected_semester=2" class="dropdown_a">2학기</a>
+			</div>
+		<input class="dropdown-sub" type="checkbox" id="dropdown-sub4" name="dropdown-sub4"/>
+		  	<label class="for-dropdown-sub" for="dropdown-sub4"><%= nYear-3 %></label>
+	  		<div class="section-dropdown-sub"> 
+	  			<a href="select_verify.jsp?selected_year=<%= nYear-3 %>&selected_semester=1" class="dropdown_a">1학기</a>
+	  			<a href="select_verify.jsp?selected_year=<%= nYear-3 %>&selected_semester=2" class="dropdown_a">2학기</a>
+			</div>	
+		<input class="dropdown-sub" type="checkbox" id="dropdown-sub5" name="dropdown-sub5"/>
+		  	<label class="for-dropdown-sub" for="dropdown-sub5"><%= nYear-4 %></label>
+	  		<div class="section-dropdown-sub"> 
+	  			<a href="select_verify.jsp?selected_year=<%= nYear-4 %>&selected_semester=1" class="dropdown_a">1학기</a>
+	  			<a href="select_verify.jsp?selected_year=<%= nYear-4 %>&selected_semester=2" class="dropdown_a">2학기</a>
+			</div>							
+		</div>
+</div>
+<div class="table">
+<div class="row header">
+<div class="cell" >과목번호</div>
+<div class="cell" >분반</div>
+<div class="cell" >과목명</div>
+<div class="cell" >학점</div>
+<div class="cell" >시간</div>
+<div class="cell" >장소</div>
+<div class="cell" >등급</div>
+<div class="cell">비고</div>
+</div>	
 	<% 
 	if (myResultSet != null) {
 		while (myResultSet.next()) {
@@ -114,17 +131,19 @@
 			count++;
 			
 	%>
-			<tr>
-				<td align="center" ><%= c_id %></td>
-				<td align="center"><%= c_id_no %></td>
-				<td align="center"><%= c_name %></td>
-				<td align="center"><%= c_unit %></td>
-				<td align="center"><%= t_time %></td>
-				<td align="center"><%= t_place %></td>
+		<div class="row">
+				<div class="cell"><%=c_id %></div>
+				<div class="cell"><%=c_id_no %></div>
+				<div class="cell"><%=c_name %></div>				
+				<div class="cell"><%=c_unit %></div>
+				<div class="cell"><%=t_time %></div>
+				<div class="cell"><%=t_place %></div>
 				<%if(e_gpa==null){%>
-					<td align="center"> </td>
+				<div class="cell"></div>
 				<%}else{ %>
-					<td align="center"><%= e_gpa %></td>
+				<div class="cell"><%=e_gpa %></div>
+	
+			</div>
 				<%} 
 				
 				mySQL_re = "select count(*) from enroll where s_id ='" + session_id+"' and c_id = '"+ c_id + "'";
@@ -134,13 +153,11 @@
 				
 					int cnt = myResultSet_re.getInt(1);
 					if (cnt > 1){%>
-						<td align="center">재수강</td>
+						<div class="cell">재수강</div>
 					<%} else {%>
-						<td align="center"></td>
+						<div class="cell"></div>
 					<%}
 				}%>	
-				
-			</tr>
 			
 		
 	<%
@@ -149,28 +166,18 @@
 	
 	if (count == 0) {
 	%>
-		<tr>
-		<td align="center" colspan="8">조회된 수업이 없습니다.</td>
-		</tr>
+		<div align="center" colspan="8">조회된 수업이 없습니다.</div>
 	<%
 	}else{
 	%>
-		<tr><td align="center">총 신청과목 수</td>
-			<td colspan="7" align="center"><%= count %></td>
-		</tr>
-		<tr><td align="center">총 신청학점</td>
-			<td colspan="7" align="center"><%= u_sum %></td>
-		</tr>
-		
+		<div class="row">
+			<div class="cell">총 신청과목 수</div>
+			<div class="cell"><%=count %></div>
+		<div class="row">
+			<div class="cell">총 신청학점</div>
+			<div class="cell"><%=u_sum %></div>
 	<%
 	}
-	%>
-	
-	
-
-
-<%
-
 if(myResultSet != null) myResultSet.close();
 if(myResultSet_re != null) myResultSet.close();
 if(pstmt != null) pstmt.close();
@@ -178,7 +185,7 @@ if(myConn != null) myConn.close();
 	/* stmt.close();
 	myConn.close(); */
 %>
-
-</table>
+</div>
+</div>
 </body>
 </html>

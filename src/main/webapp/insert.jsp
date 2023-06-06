@@ -59,8 +59,9 @@
 	<input class="dropdown" type="checkbox" id="dropdown" name="dropdown"/>
 	<label class="for-dropdown" for="dropdown">영역 선택</label>
 		<div class="section-dropdown">
+			<a href="inquiry_course.jsp?option=all" class="dropdown_a">전체</a>
 			<a href="inquiry_course.jsp?option=major" class="dropdown_a">전공</a>
-			<a href="inquiry_course.jsp?option=required" class="dropdown_a">교양필수</a>
+			<a href="inquiry_course.jsp?option=required" class="dropdown_a">필수교양</a>
 			<a href="inquiry_course.jsp?option=ge" class="dropdown_a">일반교양</a>			
 		</div>
 </div>
