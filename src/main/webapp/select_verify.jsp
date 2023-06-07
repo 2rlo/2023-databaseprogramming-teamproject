@@ -137,7 +137,7 @@
 			int c_unit = myResultSet.getInt("c_unit");
 			int t_time = myResultSet.getInt("t_time");
 			String t_place = myResultSet.getString("t_place");
-			String e_gpa = myResultSet.getString("e_gpa");
+			double e_gpa = myResultSet.getDouble("e_gpa");
 			u_sum += c_unit;
 			count++;
 			
@@ -149,7 +149,7 @@
 				<div class="cell"><%=c_unit %></div>
 				<div class="cell"><%=t_time %></div>
 				<div class="cell"><%=t_place %></div>
-				<%if(e_gpa==null){%>
+				<%if(myResultSet.wasNull()){%>
 				<div class="cell"></div>
 				<%}else{ %>
 				<div class="cell"><%=e_gpa %></div>
