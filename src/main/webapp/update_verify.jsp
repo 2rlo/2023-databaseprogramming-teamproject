@@ -26,9 +26,6 @@ String user=System.getenv("user");
 String passwd = System.getenv("passwd");
 String dbdriver = "oracle.jdbc.driver.OracleDriver";
 
-System.out.println(s_pwd);
-System.out.println(exist_pwd);
-
 try {
 Class.forName(dbdriver);
 myConn = DriverManager.getConnection(dburl, user, passwd);
